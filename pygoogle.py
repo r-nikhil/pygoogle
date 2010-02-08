@@ -105,8 +105,14 @@ class pygoogle:
         """Returns the number of results"""
         temp = self.pages
         self.pages = 1
-        return self.__search__()[0]['responseData']['cursor']['estimatedResultCount']
-        self.pages = temp
+        result_count = 0
+        try:
+            result_count = self.__search__()[0]['responseData']['cursor']['estimatedResultCount']
+        except Exception,e:
+            print e
+        finally:
+            self.pages = temp
+        return result_count
         
     def display_results(self):
         """Prints results (for command line)"""
