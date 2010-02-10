@@ -74,12 +74,33 @@ class pygoogle:
             data = json.loads(search_results.read())
             if print_results:
                 for result in  data['responseData']['results']:
-                    #print result
                     if result:
                         print '[%s]'%(urllib.unquote(result['titleNoFormatting']))
                         print result['content'].strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
                         print urllib.unquote(result['unescapedUrl'])+'\n'                
             results.append(data)
+        return results
+    
+    def search_page_wise(self):
+        """Returns a dict of page-wise urls"""
+        results = {}
+        for page in range(0,self.pages):
+            args = {'q' : self.query,
+                    'v' : '1.0',
+                    'start' : page,
+                    'rsz': RSZ_LARGE,
+                    'safe' : SAFE_OFF, 
+                    'filter' : FILTER_ON,    
+                    }
+            q = urllib.urlencode(args)
+            search_results = urllib.urlopen(URL+q)
+            data = json.loads(search_results.read())
+            urls = []
+            for result in  data['responseData']['results']:
+                if result:
+                    url = urllib.unquote(result['unescapedUrl'])
+                    urls.append(url)            
+            results[page] = urls
         return results
     
     def search(self):
@@ -122,7 +143,6 @@ class pygoogle:
 if __name__ == "__main__":
     import sys
     query = ' '.join(sys.argv[1:])
-    #print pygoogle(' '.join(sys.argv[1:])).display_results()
     g = pygoogle(query)
     print '*Found %s results*'%(g.get_result_count())
     g.pages = 1
