@@ -49,15 +49,22 @@ A value of large indicates a large result set or 8 results. If this argument is 
 RSZ_SMALL = "small"
 RSZ_LARGE = "large"
 
+"""
+HL
+This optional argument supplies the host language of the application making the request. 
+If this argument is not present then the system will choose a value based on the value of the Accept-Language http header. 
+If this header is not present, a value of en is assumed.
+"""
 
 class pygoogle:
     
-    def __init__(self,query,pages=10):
+    def __init__(self,query,pages=10,hl='en'):
         self.pages = pages          #Number of pages. default 10
         self.query = query
         self.filter = FILTER_ON     #Controls turning on or off the duplicate content filter. On = 1.
         self.rsz = RSZ_LARGE        #Results per page. small = 4 /large = 8
         self.safe = SAFE_OFF        #SafeBrowsing -  active/moderate/off
+        self.hl = hl                #Defaults to English (en)
         
     def __search__(self,print_results = False):
         results = []
@@ -71,6 +78,7 @@ class pygoogle:
                     'rsz': self.rsz,
                     'safe' : self.safe, 
                     'filter' : self.filter,    
+                    'hl'    : self.hl
                     }
             q = urllib.urlencode(args)
             search_results = urllib.urlopen(URL+q)
