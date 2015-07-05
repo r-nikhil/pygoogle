@@ -17,7 +17,7 @@ import urllib
 import logging
 import argparse
 
-__author__ = "Kiran Bandla"
+__author__ = "Nikhil. R"
 __version__ = "0.2"
 URL = 'http://ajax.googleapis.com/ajax/services/search/web?'
 
