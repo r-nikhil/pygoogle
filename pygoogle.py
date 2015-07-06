@@ -4,12 +4,7 @@ Google AJAX Search Module
 http://code.google.com/apis/ajaxsearch/documentation/reference.html
 Needs Python 2.6 or later
 """
-try:
-    import json
-except ImportError, e:
-    print e
-    exit()
-
+import json
 import sys
 import urllib
 import logging
