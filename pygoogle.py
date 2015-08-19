@@ -65,7 +65,7 @@ If this header is not present, a value of en is assumed.
 
 class pygoogle:
     def __init__(self, query, pages=10, hl='en', log_level=logging.INFO):
-        self.pages = pages  #Number of pages. default 10
+        self.pages = int(pages)  #Number of pages. default 10
         self.query = query
         self.filter = FILTER_ON  #Controls turning on or off the duplicate content filter. On = 1.
         self.rsz = RSZ_LARGE  #Results per page. small = 4 /large = 8
