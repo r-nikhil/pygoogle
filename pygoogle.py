@@ -33,14 +33,7 @@ SAFE_ACTIVE = "active"
 SAFE_MODERATE = "moderate"
 SAFE_OFF = "off"
 
-"""
-FILTER
-This optional argument controls turning on or off the duplicate content filter:
 
-    * filter=0 - Turns off the duplicate content filter
-    * filter=1 - Turns on the duplicate content filter (default)
-
-"""
 FILTER_OFF = 0
 FILTER_ON = 1
 
